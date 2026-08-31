@@ -29,5 +29,5 @@ jobs:
           context: ./backend/app
           push: true
           tags: |
-            flexiblekim/openstream-backend:v2
+            flexiblekim/openstream-backend:${{ github.sha }}
             flexiblekim/openstream-backend:latest

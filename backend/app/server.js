@@ -7,7 +7,7 @@ const server = http.createServer((req, res) => {
         'Content-Type': 'text/plain; charset=utf-8'
     });
 
-    res.end('Hello from My OpenStream Backend v2!\n');
+    res.end('Hello from My OpenStream Backend v3!\n');
 });
 
 server.listen(PORT, '0.0.0.0', () => {
