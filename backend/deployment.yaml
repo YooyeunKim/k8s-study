@@ -19,6 +19,6 @@ spec:
     spec:
       containers:
         - name: backend
-          image: flexiblekim/openstream-backend:v1
+          image: flexiblekim/openstream-backend:0e91d9feb5d06d7226b4bf4dd3ae33d7d43a8887
           ports:
             - containerPort: 5678
