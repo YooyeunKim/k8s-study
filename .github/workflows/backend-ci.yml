@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
-      - develop
     paths:
       - 'backend/app/**'
       - '.github/workflows/backend-ci.yml'
+
+permissions:
+  contents: write
 
 jobs:
   build-and-push:
@@ -31,3 +33,18 @@ jobs:
           tags: |
             flexiblekim/openstream-backend:${{ github.sha }}
             flexiblekim/openstream-backend:latest
+
+      - name: Update Kubernetes manifest
+        run: |
+          sed -i \
+            "s|image: flexiblekim/openstream-backend:.*|image: flexiblekim/openstream-backend:${{ github.sha }}|" \
+            backend/deployment.yaml
+
+      - name: Commit manifest change
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add backend/deployment.yaml
+          git commit -m "Deploy backend ${{ github.sha }}" || exit 0
+          git push
